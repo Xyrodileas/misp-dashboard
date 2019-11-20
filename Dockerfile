@@ -13,14 +13,12 @@ WORKDIR /var/www
 RUN chown www-data:www-data /var/www
 USER www-data
 
-#Start installing dashboard 
-RUN git clone https://github.com/MISP/misp-dashboard.git
+#Start installing dashboard
+RUN git clone --branch 1.3 https://github.com/MISP/misp-dashboard.git
 WORKDIR /var/www/misp-dashboard
-RUN pwd;ls
 RUN ./install_dependencies.sh
 
 #Run misp-dashboard
 ADD run.sh /run.sh
 RUN sudo chmod +x /run.sh
-RUN env
 ENTRYPOINT ["/run.sh"]
