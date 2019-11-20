@@ -1,19 +1,26 @@
 FROM ubuntu:xenial
 
+# Install core components
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update && apt-get dist-upgrade -y && apt-get autoremove -y && apt-get clean
+RUN apt-get install -y sudo git python3 python3-virtualenv apt-utils wget redis-server
+RUN adduser www-data sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+
 # Setup www dir
 WORKDIR /var/www
 RUN chown www-data:www-data /var/www
 USER www-data
 
 #Start installing dashboard 
-RUN git clone https://github.com/xyrodileas/misp-dashboard.git
+RUN git clone https://github.com/MISP/misp-dashboard.git
 WORKDIR /var/www/misp-dashboard
+RUN pwd;ls
 RUN ./install_dependencies.sh
 
-#Configure misp-dashboard
-
 #Run misp-dashboard
-RUN . ./DASHENV/bin/activate
-RUN ./zmq_subscriber.py &
-RUN ./zmq_dispatcher.py &
-RUN ./server.py
+ADD run.sh /run.sh
+RUN sudo chmod +x /run.sh
+RUN env
+ENTRYPOINT ["/run.sh"]
