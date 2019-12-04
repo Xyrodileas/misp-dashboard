@@ -14,9 +14,7 @@ cat config/config.cfg
 #Run misp-dashboard
 echo "Enabling virtualenv"
 . ./DASHENV/bin/activate
-echo "Starting zmq subscriber"
-./zmq_subscriber.py &
-echo "Starting zmq dispatcher"
-./zmq_dispatcher.py &
+echo "Starting zmq"
+./start_zmq.sh
 echo "Starting server"
 ./server.py
