@@ -15,4 +15,8 @@ cat config/config.cfg
 echo "Enabling virtualenv"
 . ./DASHENV/bin/activate
 echo "Starting zmq subscriber"
-./start_all.sh
+./zmq_subscriber.py &
+echo "Starting zmq dispatcher"
+./zmq_dispatcher.py &
+echo "Starting server"
+./server.py
