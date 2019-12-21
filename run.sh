@@ -20,15 +20,15 @@ sed -i "s#\"zmq\": \"tcp://localhost:50000\"#\"zmq\": \"tcp://$ZMQ_URL:$ZMQ_PORT
 cat config/config.cfg
 
 #Run misp-dashboard
-echo "Enabling virtualenv"
-. ./DASHENV/bin/activate
 echo "Starting zmq"
 ./start_zmq.sh
+
 # Setting up env for Flask
 export FLASK_DEBUG=1
 export FLASK_APP=server.py
 export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
+
 echo "Starting server"
 flask run --host=0.0.0.0 --port=8001
 
