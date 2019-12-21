@@ -12,6 +12,7 @@ sed -i "s#session_secret = \*\*Change_Me\*\*#session_secret = $(cat /dev/urandom
 sed -i "s#auth_enabled = False#auth_enabled = $AUTH_ENABLED#" config/config.cfg
 sed -i "s#ssl_verify = True#ssl_verify = $SSL_VERIFY#" config/config.cfg
 
+sed -i "s#stdout = False#stdout = True" config/config.cfg
 
 sed -i "s#\"url\": \"http://localhost\"#\"url\": \"$MISP_URL\"#" config/config.cfg
 sed -i "s#\"zmq\": \"tcp://localhost:50000\"#\"zmq\": \"tcp://$ZMQ_URL:$ZMQ_PORT\"#" config/config.cfg
