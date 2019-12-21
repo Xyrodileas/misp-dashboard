@@ -11,6 +11,8 @@ sed -i "s#session_secret = \*\*Change_Me\*\*#session_secret = $(cat /dev/urandom
 
 sed -i "s#auth_enabled = False#auth_enabled = $AUTH_ENABLED#" config/config.cfg
 sed -i "s#ssl_verify = True#ssl_verify = $SSL_VERIFY#" config/config.cfg
+sed -i "s#session_cookie_secure = True#session_cookie_secure = $SECURE_COOKIE#" config/config.cfg
+session_cookie_secure = True
 
 sed -i "s#stdout = False#stdout = True" config/config.cfg
 
