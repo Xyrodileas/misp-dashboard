@@ -18,7 +18,12 @@ RUN git clone https://github.com/VVX7/misp-dashboard.git
 WORKDIR /var/www/misp-dashboard
 RUN export VIRTUAL_ENV=1
 RUN ./install_dependencies.sh
-RUN pip3 install -U -r requirements.txt
+
+USER root
+RUN apt-get install python3-pip
+RUN python3 -m pip install -r requirements.txt
+
+USER www-data
 
 #Run misp-dashboard
 ADD run.sh /run.sh
