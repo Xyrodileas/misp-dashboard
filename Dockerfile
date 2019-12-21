@@ -14,7 +14,7 @@ RUN chown www-data:www-data /var/www
 USER www-data
 
 #Start installing dashboard
-RUN git clone https://github.com/MISP/misp-dashboard.git
+RUN git clone https://github.com/VVX7/misp-dashboard.git
 WORKDIR /var/www/misp-dashboard
 RUN ./install_dependencies.sh
 
