@@ -18,11 +18,6 @@ RUN git clone https://github.com/VVX7/misp-dashboard.git
 WORKDIR /var/www/misp-dashboard
 RUN ./install_dependencies.sh
 
-RUN sudo apt-get install -y python3-pip
-RUN sudo python3 -m pip install -r requirements.txt
-
-USER www-data
-
 #Run misp-dashboard
 ADD run.sh /run.sh
 RUN sudo chmod +x /run.sh
