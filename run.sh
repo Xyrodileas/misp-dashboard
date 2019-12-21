@@ -30,6 +30,6 @@ export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 
 echo "Starting server"
-flask run --host=0.0.0.0 --port=8001
+python3 -m flask run --host=0.0.0.0 --port=8001
 
 
