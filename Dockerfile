@@ -16,7 +16,6 @@ USER www-data
 #Start installing dashboard
 RUN git clone https://github.com/VVX7/misp-dashboard.git
 WORKDIR /var/www/misp-dashboard
-RUN export VIRTUAL_ENV=1
 RUN ./install_dependencies.sh
 
 RUN sudo apt-get install -y python3-pip
