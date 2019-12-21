@@ -19,9 +19,8 @@ WORKDIR /var/www/misp-dashboard
 RUN export VIRTUAL_ENV=1
 RUN ./install_dependencies.sh
 
-USER root
-RUN apt-get install python3-pip
-RUN python3 -m pip install -r requirements.txt
+RUN sudo apt-get install -y python3-pip
+RUN sudo python3 -m pip install -r requirements.txt
 
 USER www-data
 
