@@ -1,5 +1,24 @@
-#!/bin/bash
+#!/bin/sh
 env
+
+## config
+if [ -e "config/config.cfg" ]; then
+    diff -u config/config.cfg.default config/config.cfg
+    if [ "$?" == "0" ]; then
+        cp -f config/config.cfg.default config/config.cfg
+    else
+        echo "Your config has changes, giving you a chance to see the changes and decide if you want to overwrite"
+        cp -i config/config.cfg.default config/config.cfg
+    fi
+else
+    cp -i config/config.cfg.default config/config.cfg
+    echo "Sanitizing MaxMindDB Path"
+    sed -i "s|pathMaxMindDB=./data/GeoLite2-City/GeoLite2-City.mmdb|pathMaxMindDB=$PWD/data/GeoLite2-City/GeoLite2-City.mmdb|" config/config.cfg
+    sed -i "s|path_countrycode_to_coord_JSON=./data/country_code_lat_long.json|path_countrycode_to_coord_JSON=$PWD/data/country_code_lat_long.json|" config/config.cfg
+fi
+
+
+
 #Configure misp-dashboard
 sed -i "s#host = localhost#host = 0.0.0.0#" config/config.cfg
 sed -i "s#host=localhost#host=$REDISHOST#" config/config.cfg
@@ -21,9 +40,6 @@ sed -i "s#\"zmq\": \"tcp://localhost:50000\"#\"zmq\": \"tcp://$ZMQ_URL:$ZMQ_PORT
 
 cat config/config.cfg
 
-#Run misp-dashboard
-echo "Enabling virtualenv"
-. ./DASHENV/bin/activate
 echo "Starting zmq"
 ./start_zmq.sh
 # Setting up env for Flask
@@ -33,5 +49,3 @@ export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 echo "Starting server"
 python3 -m flask run --host=0.0.0.0 --port=8001
-
-
