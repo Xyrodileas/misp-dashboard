@@ -12,7 +12,6 @@ sed -i "s#session_secret = \*\*Change_Me\*\*#session_secret = $(cat /dev/urandom
 sed -i "s#auth_enabled = False#auth_enabled = $AUTH_ENABLED#" config/config.cfg
 sed -i "s#ssl_verify = True#ssl_verify = $SSL_VERIFY#" config/config.cfg
 sed -i "s#session_cookie_secure = True#session_cookie_secure = $SECURE_COOKIE#" config/config.cfg
-session_cookie_secure = True
 
 sed -i "s#stdout = False#stdout = True" config/config.cfg
 
@@ -22,8 +21,6 @@ sed -i "s#\"zmq\": \"tcp://localhost:50000\"#\"zmq\": \"tcp://$ZMQ_URL:$ZMQ_PORT
 cat config/config.cfg
 
 #Run misp-dashboard
-echo "Enabling virtualenv"
-. ./DASHENV/bin/activate
 echo "Starting zmq"
 ./start_zmq.sh
 # Setting up env for Flask
@@ -33,5 +30,3 @@ export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 echo "Starting server"
 python3 -m flask run --host=0.0.0.0 --port=8001
-
-
