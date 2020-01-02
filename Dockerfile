@@ -7,7 +7,7 @@ RUN apt-get install -y sudo git python3 python3-virtualenv apt-utils wget redis-
 RUN adduser www-data sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-RUN python3 -p pip install flask
+RUN python3 -m pip install flask
 
 # Setup www dir
 WORKDIR /var/www
