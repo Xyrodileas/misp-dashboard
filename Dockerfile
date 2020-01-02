@@ -18,7 +18,7 @@ USER www-data
 RUN git clone --branch master https://github.com/VVX7/misp-dashboard.git
 WORKDIR /var/www/misp-dashboard
 RUN export VIRTUAL_ENV=False; ./install_dependencies.sh
-RUN pip3 install flask
+RUN python3 -m pip3 install flask
 
 #Run misp-dashboard
 ADD run.sh /run.sh
