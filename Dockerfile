@@ -16,7 +16,7 @@ USER www-data
 #Start installing dashboard
 RUN git clone --branch master https://github.com/VVX7/misp-dashboard.git
 WORKDIR /var/www/misp-dashboard
-RUN ./install_dependencies.sh
+RUN export VIRTUAL_ENV=1; ./install_dependencies.sh
 
 #Run misp-dashboard
 ADD run.sh /run.sh
