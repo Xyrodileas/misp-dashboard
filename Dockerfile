@@ -7,7 +7,7 @@ RUN apt-get install -y sudo git python3 python3-virtualenv apt-utils wget redis-
 RUN adduser www-data sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-RUN python3 -m pip install flask
+
 
 # Setup www dir
 WORKDIR /var/www
@@ -18,6 +18,7 @@ USER www-data
 RUN git clone --branch master https://github.com/VVX7/misp-dashboard.git
 WORKDIR /var/www/misp-dashboard
 RUN export VIRTUAL_ENV=False; ./install_dependencies.sh
+RUN python3 -m pip install flask
 
 #Run misp-dashboard
 ADD run.sh /run.sh
