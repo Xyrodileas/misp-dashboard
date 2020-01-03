@@ -3,7 +3,10 @@ FROM ubuntu:xenial
 # Install core components
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get dist-upgrade -y && apt-get autoremove -y && apt-get clean
-RUN apt-get install -y sudo git python3 python3-virtualenv apt-utils wget redis-server python3-pip
+RUN apt-get install -y sudo git python3 python3-virtualenv apt-utils wget redis-server
+RUN wget https://bootstrap.pypa.io/get-pip.py; python3 get-pip.py
+RUN pip3 install flask
+
 RUN adduser www-data sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
@@ -17,7 +20,7 @@ USER www-data
 #Start installing dashboard
 RUN git clone --branch master https://github.com/VVX7/misp-dashboard.git
 WORKDIR /var/www/misp-dashboard
-RUN pip3 install flask
+
 RUN export VIRTUAL_ENV=False; ./install_dependencies.sh
 
 
