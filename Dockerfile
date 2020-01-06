@@ -6,6 +6,7 @@ RUN apt-get update && apt-get dist-upgrade -y && apt-get autoremove -y && apt-ge
 RUN apt-get install -y sudo git python3 python3-virtualenv apt-utils wget redis-server
 RUN wget https://bootstrap.pypa.io/get-pip.py; python3 get-pip.py
 
+RUN pip3 install flask redis
 RUN adduser www-data sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
@@ -20,7 +21,7 @@ USER www-data
 RUN git clone --branch master https://github.com/VVX7/misp-dashboard.git
 WORKDIR /var/www/misp-dashboard
 
-RUN export VIRTUAL_ENV=False; sudo ./install_dependencies.sh
+RUN VIRTUAL_ENV=False; sudo ./install_dependencies.sh
 
 
 #Run misp-dashboard
