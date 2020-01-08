@@ -6,7 +6,7 @@ RUN apt-get update && apt-get dist-upgrade -y && apt-get autoremove -y && apt-ge
 RUN apt-get install -y sudo git python3 python3-virtualenv apt-utils wget redis-server
 RUN wget https://bootstrap.pypa.io/get-pip.py; python3 get-pip.py
 
-RUN pip3 install flask redis
+RUN pip3 install flask flask_login redis
 RUN adduser www-data sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
