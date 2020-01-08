@@ -20,7 +20,7 @@ USER www-data
 #Start installing dashboard
 RUN git clone --branch master https://github.com/VVX7/misp-dashboard.git
 WORKDIR /var/www/misp-dashboard
-
+RUN sudo pip3 install -r requirements.txt
 RUN VIRTUAL_ENV="TUTU"; sudo ./install_dependencies.sh
 
 
