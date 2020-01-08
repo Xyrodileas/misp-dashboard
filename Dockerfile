@@ -21,7 +21,7 @@ USER www-data
 RUN git clone --branch master https://github.com/VVX7/misp-dashboard.git
 WORKDIR /var/www/misp-dashboard
 
-RUN VIRTUAL_ENV=False; sudo ./install_dependencies.sh
+RUN VIRTUAL_ENV="TUTU"; sudo ./install_dependencies.sh
 
 
 #Run misp-dashboard
